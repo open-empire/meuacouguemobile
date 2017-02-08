@@ -1,4 +1,4 @@
-package info.androidhive.butchery.model;
+package br.com.codecode.butchery.model;
 
 import java.io.Serializable;
 

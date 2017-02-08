@@ -1,4 +1,4 @@
-package info.androidhive.butchery.activity;
+package br.com.codecode.butchery.activity;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -17,8 +17,8 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.ArrayList;
 
-import info.androidhive.butchery.R;
-import info.androidhive.butchery.model.Image;
+import br.com.codecode.butchery.R;
+import br.com.codecode.butchery.model.Image;
 
 
 public class SlideshowDialogFragment extends DialogFragment {

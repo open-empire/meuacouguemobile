@@ -1,4 +1,4 @@
-package info.androidhive.butchery;
+package com.br.codecode.butchery;
 
 import org.junit.Test;
 

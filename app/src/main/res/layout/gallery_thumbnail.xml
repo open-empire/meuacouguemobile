@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<info.androidhive.butchery.helper.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<br.com.codecode.butchery.helper.SquareLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
@@ -11,4 +11,4 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop" />
-</info.androidhive.butchery.helper.SquareLayout>
+</br.com.codecode.butchery.helper.SquareLayout>

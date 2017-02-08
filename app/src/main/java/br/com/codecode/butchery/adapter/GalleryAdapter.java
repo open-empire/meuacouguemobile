@@ -1,4 +1,4 @@
-package info.androidhive.butchery.adapter;
+package br.com.codecode.butchery.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -14,13 +14,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.util.List;
 
-import info.androidhive.butchery.R;
-import info.androidhive.butchery.model.Image;
+import br.com.codecode.butchery.R;
+import br.com.codecode.butchery.model.Image;
 
 /**
  * Created by Lincoln on 31/03/16.
  */
-
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
     private List<Image> images;

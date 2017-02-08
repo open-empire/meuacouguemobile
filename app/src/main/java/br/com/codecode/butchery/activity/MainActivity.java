@@ -1,4 +1,4 @@
-package info.androidhive.butchery.activity;
+package br.com.codecode.butchery.activity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,10 +23,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import info.androidhive.butchery.R;
-import info.androidhive.butchery.adapter.GalleryAdapter;
-import info.androidhive.butchery.app.AppController;
-import info.androidhive.butchery.model.Image;
+import br.com.codecode.butchery.R;
+import br.com.codecode.butchery.adapter.GalleryAdapter;
+import br.com.codecode.butchery.app.AppController;
+import br.com.codecode.butchery.model.Image;
 
 public class MainActivity extends AppCompatActivity {
 

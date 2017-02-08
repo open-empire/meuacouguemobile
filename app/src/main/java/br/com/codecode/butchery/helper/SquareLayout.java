@@ -1,4 +1,4 @@
-package info.androidhive.butchery.helper;
+package br.com.codecode.butchery.helper;
 
 import android.annotation.TargetApi;
 import android.content.Context;

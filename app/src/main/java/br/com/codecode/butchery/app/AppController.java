@@ -1,4 +1,4 @@
-package info.androidhive.butchery.app;
+package br.com.codecode.butchery.app;
 
 import android.app.Application;
 import android.text.TextUtils;
