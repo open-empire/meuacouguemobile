@@ -39,6 +39,8 @@ public class SlideshowDialogFragment extends DialogFragment {
 
     private FloatingActionButton floatingActionButton;
 
+    private Context context;
+
     static SlideshowDialogFragment newInstance() {
         SlideshowDialogFragment f = new SlideshowDialogFragment();
         return f;
@@ -60,8 +62,6 @@ public class SlideshowDialogFragment extends DialogFragment {
 
         lblPrice = (TextView) v.findViewById(R.id.price);
 
-        floatingActionButton = (FloatingActionButton) v.findViewById(R.id.floatingActBtn);
-
         images = (ArrayList<Image>) getArguments().getSerializable("images");
 
         selectedPosition = getArguments().getInt("position");
@@ -75,15 +75,7 @@ public class SlideshowDialogFragment extends DialogFragment {
 
         setCurrentItem(selectedPosition);
 
-        //TODO FIXME floatingActionButton is null
-        if(floatingActionButton != null){
-            floatingActionButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(getContext(), "Nada nada nada nada, eu não estou fazendo nada!", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+        context = v.getContext();
 
         return v;
     }
@@ -143,6 +135,17 @@ public class SlideshowDialogFragment extends DialogFragment {
             layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
             View view = layoutInflater.inflate(R.layout.image_fullscreen_preview, container, false);
+
+            floatingActionButton = (FloatingActionButton) view.findViewById(R.id.floatingActBtn);
+
+            if(floatingActionButton != null){
+                floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(context, "Nada nada nada nada, eu não estou fazendo nada!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
 
             ImageView imageViewPreview = (ImageView) view.findViewById(R.id.image_preview);
 
