@@ -17,9 +17,6 @@ import java.util.List;
 import br.com.codecode.butchery.R;
 import br.com.codecode.butchery.model.Image;
 
-/**
- * Created by Lincoln on 31/03/16.
- */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHolder> {
 
     private List<Image> images;

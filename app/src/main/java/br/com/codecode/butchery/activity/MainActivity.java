@@ -3,7 +3,10 @@ package br.com.codecode.butchery.activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -32,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String TAG = getClass().getSimpleName();
 
-    private static final String endpoint = "http://www.codecode.com.br/json/butchery.json";
+    private static final String ENDPOINT = "http://www.codecode.com.br/json/butchery.json";
 
     private ArrayList<Image> images;
 
@@ -41,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
     private GalleryAdapter mAdapter;
 
     private RecyclerView recyclerView;
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private Context context;
 
@@ -63,9 +68,11 @@ public class MainActivity extends AppCompatActivity {
 
         images = new ArrayList<>();
 
-        mAdapter = new GalleryAdapter(getApplicationContext(), images);
+        mAdapter = new GalleryAdapter(context, images);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefresh);
+
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(context, 2);
 
         recyclerView.setLayoutManager(mLayoutManager);
 
@@ -73,8 +80,22 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(mAdapter);
 
-         recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(getApplicationContext(),
-                 recyclerView, new GalleryAdapter.ClickListener() {
+    }
+
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d("Swipe", "on Refresh event called");
+                fetchImages();
+            }
+        });
+
+        recyclerView.addOnItemTouchListener(new GalleryAdapter.RecyclerTouchListener(context,
+                recyclerView, new GalleryAdapter.ClickListener() {
 
             @Override
             public void onClick(View view, int position) {
@@ -90,7 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onLongClick(View view, int position) {
-                Toast.makeText(context,"Long Click Listener",Toast.LENGTH_LONG).show();
+                Toast.makeText(context,"Clique longo! Não faço nada!",Toast.LENGTH_LONG).show();
             }
         }));
 
@@ -99,10 +120,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void fetchImages() {
 
-        pDialog.setMessage("Downloading json...");
+        pDialog.setMessage("Descarregando carnes...");
         pDialog.show();
+        // Signal SwipeRefreshLayout to start the progress indicator
+        swipeRefreshLayout.setRefreshing(true);
 
-        JsonArrayRequest req = new JsonArrayRequest(endpoint,
+        JsonArrayRequest req = new JsonArrayRequest(ENDPOINT,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -141,12 +164,20 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         mAdapter.notifyDataSetChanged();
+
+                        // Signal SwipeRefreshLayout to start the progress indicator
+                        swipeRefreshLayout.setRefreshing(false);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+
                 Log.e(TAG, "Error: " + error.getMessage());
+
                 pDialog.hide();
+
+                // Signal SwipeRefreshLayout to start the progress indicator
+                swipeRefreshLayout.setRefreshing(false);
             }
         });
 

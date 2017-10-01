@@ -2,6 +2,7 @@ package br.com.codecode.butchery.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -35,6 +37,8 @@ public class SlideshowDialogFragment extends DialogFragment {
 
     private int selectedPosition = 0;
 
+    private FloatingActionButton floatingActionButton;
+
     static SlideshowDialogFragment newInstance() {
         SlideshowDialogFragment f = new SlideshowDialogFragment();
         return f;
@@ -56,6 +60,8 @@ public class SlideshowDialogFragment extends DialogFragment {
 
         lblPrice = (TextView) v.findViewById(R.id.price);
 
+        floatingActionButton = (FloatingActionButton) v.findViewById(R.id.floatingActBtn);
+
         images = (ArrayList<Image>) getArguments().getSerializable("images");
 
         selectedPosition = getArguments().getInt("position");
@@ -68,6 +74,16 @@ public class SlideshowDialogFragment extends DialogFragment {
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
         setCurrentItem(selectedPosition);
+
+        //TODO FIXME floatingActionButton is null
+        if(floatingActionButton != null){
+            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(getContext(), "Nada nada nada nada, eu não estou fazendo nada!", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         return v;
     }
@@ -110,6 +126,8 @@ public class SlideshowDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
     }
+
+
 
     //	adapter
     public class MyViewPagerAdapter extends PagerAdapter {

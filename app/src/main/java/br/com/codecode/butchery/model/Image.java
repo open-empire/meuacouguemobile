@@ -2,17 +2,13 @@ package br.com.codecode.butchery.model;
 
 import java.io.Serializable;
 
-/**
- * Created by Lincoln on 04/04/16.
- */
 public class Image implements Serializable{
     private String name;
     private String small, medium, large;
     private String timestamp;
     private double price;
 
-    public Image() {
-    }
+    public Image(){}
 
     public Image(String name, String small, String medium, String large, String timestamp,double price) {
         this.name = name;
